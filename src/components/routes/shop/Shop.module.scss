@@ -1,0 +1,19 @@
+.shop_wrapper {
+  display: flex;
+  justify-content: space-between;
+
+  .shop_sidebar {
+    border: 1px solid grey;
+    border-radius: 20px;
+    width: 20%;
+    padding: 15px;
+    height: 500px;
+  }
+  .shop_main_window {
+    border: 1px solid grey;
+    border-radius: 20px;
+    width: 70%;
+    padding: 15px;
+    height: 500px;
+  }
+}
