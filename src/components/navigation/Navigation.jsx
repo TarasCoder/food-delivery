@@ -19,7 +19,7 @@ function Navigation() {
         to="/cart"
         className={`${navigation.link} ${location.pathname === "/cart" ? navigation.active_link : ""}`}
       >
-        Cart
+        Shopping Cart
       </NavLink>
     </div>
   );

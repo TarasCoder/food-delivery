@@ -4,16 +4,32 @@
 
   .shop_sidebar {
     border: 1px solid grey;
-    border-radius: 20px;
+    border-radius: 5px;
     width: 20%;
     padding: 15px;
     height: 500px;
+    .shop_item {
+      padding: 10px;
+      border: 1px solid grey;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      text-align: center;
+    }
   }
   .shop_main_window {
     border: 1px solid grey;
-    border-radius: 20px;
+    border-radius: 5px;
     width: 70%;
     padding: 15px;
     height: 500px;
+    overflow: scroll;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .title {
+    font-size: 18px;
+    margin: 0 0 20px;
+    text-align: center;
   }
 }
