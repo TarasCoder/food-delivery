@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { ShopContext } from "../../contexts/ShopContext";
 import productItem from "./ProductItem.module.scss";
@@ -6,10 +6,9 @@ import productItem from "./ProductItem.module.scss";
 function ProductItem({ item }) {
   const { name, price, img } = item;
   const { cart, setCart } = useContext(CartContext);
-  const { currentShop, setIsProductSet } = useContext(ShopContext);
+  const { setIsProductSet } = useContext(ShopContext);
 
   const addToCart = () => {
-
     setIsProductSet(true);
     alert("Added to cart!");
     setCart(() => {

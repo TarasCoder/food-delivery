@@ -23,7 +23,6 @@ function CartItem({ item }) {
       })
     );
     setTotalCost((prev) => prev - Number(item.price * quantity));
-    console.log(cart.length)
     if (cart.length === 1) setIsProductSet(false);
   };
 
