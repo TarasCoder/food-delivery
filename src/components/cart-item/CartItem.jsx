@@ -1,21 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import deleteIcon from "../../assets/cancel-icon.png";
 import cartItem from "./CartItem.module.scss";
 
 function CartItem({ item }) {
   const { name, img, quantity, price } = item;
-  const { cart, setCart, totalCost, setTotalCost } = useContext(CartContext);
+  const { cart, setCart, setTotalCost } = useContext(CartContext);
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
   const [totalPrice, setTotalPrice] = useState((price * quantity).toFixed(2));
 
   useEffect(() => {
     setTotalPrice((price * quantity).toFixed(2));
-    // setTotalCost((prev) => {
-    //     prev = 0;
-    //     return Number(prev) + Number((price * quantity).toFixed(2));
-    // });
     calculateTotal(cart);
   }, [currentQuantity]);
+
+  const deleteItem = () => {
+    setCart(
+      cart.filter((product) => {
+        return !(product.id === item.id);
+      })
+    );
+  };
 
   const calculateTotal = (cart) => {
     let total = 0;
@@ -55,6 +60,12 @@ function CartItem({ item }) {
         className={cartItem.product_quantity}
       />
       <h4>Total {totalPrice} $</h4>
+      <img
+        src={deleteIcon}
+        alt="delete icon"
+        className={cartItem.delete_icon}
+        onClick={deleteItem}
+      />
     </div>
   );
 }
