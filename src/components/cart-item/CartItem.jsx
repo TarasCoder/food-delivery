@@ -20,12 +20,13 @@ function CartItem({ item }) {
         return !(product.id === item.id);
       })
     );
+    setTotalCost((prev) => prev - Number(item.price * quantity));
   };
 
   const calculateTotal = (cart) => {
     let total = 0;
     cart.forEach((element) => {
-      setTotalCost((total += element.price * element.quantity).toFixed(2));
+      setTotalCost((total += element.price * element.quantity));
     });
   };
 

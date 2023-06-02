@@ -5,7 +5,8 @@ import cart_styles from "./Cart.module.scss";
 
 function Cart() {
   const { cart, totalCost } = useContext(CartContext);
-  
+  const formattedTotalCost = Number(totalCost).toFixed(2);
+
   return (
     <div>
       <div className={cart_styles.cart_wrapper}>
@@ -36,7 +37,9 @@ function Cart() {
         </div>
       </div>
       <div className={cart_styles.submit_section}>
-        <p className={cart_styles.total_price}>Total price: {totalCost} $</p>
+        <p className={cart_styles.total_price}>
+          Total price: {formattedTotalCost} $
+        </p>
         <button className={cart_styles.submit_btn}>Submit</button>
       </div>
     </div>

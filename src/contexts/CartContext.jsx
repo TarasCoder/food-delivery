@@ -4,7 +4,7 @@ const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [totalCost, setTotalCost] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
 
   const contextValue = {
     cart,
