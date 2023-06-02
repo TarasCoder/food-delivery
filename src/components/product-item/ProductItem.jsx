@@ -1,16 +1,20 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { ShopContext } from "../../contexts/ShopContext";
 import productItem from "./ProductItem.module.scss";
 
 function ProductItem({ item }) {
   const { name, price, img } = item;
   const { cart, setCart } = useContext(CartContext);
+  const { currentShop, setIsProductSet } = useContext(ShopContext);
+
   const addToCart = () => {
+
+    setIsProductSet(true);
     alert("Added to cart!");
     setCart(() => {
       let isThereItem = cart.find((product) => product.id === item.id);
       if (isThereItem) {
-        console.log("This item is already in the cart!");
         return cart.map((productItem) => {
           return productItem === isThereItem
             ? { ...productItem, quantity: productItem.quantity + 1 }

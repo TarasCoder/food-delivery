@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { ShopContext } from "../../contexts/ShopContext";
 import deleteIcon from "../../assets/cancel-icon.png";
 import cartItem from "./CartItem.module.scss";
 
 function CartItem({ item }) {
   const { name, img, quantity, price } = item;
   const { cart, setCart, setTotalCost } = useContext(CartContext);
+  const { setIsProductSet } = useContext(ShopContext);
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
   const [totalPrice, setTotalPrice] = useState((price * quantity).toFixed(2));
 
@@ -21,6 +23,8 @@ function CartItem({ item }) {
       })
     );
     setTotalCost((prev) => prev - Number(item.price * quantity));
+    console.log(cart.length)
+    if (cart.length === 1) setIsProductSet(false);
   };
 
   const calculateTotal = (cart) => {

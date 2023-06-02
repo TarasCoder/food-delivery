@@ -16,6 +16,10 @@
       cursor: pointer;
       text-align: center;
     }
+    .inactive_shop {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
   .shop_main_window {
     border: 1px solid grey;
