@@ -4,10 +4,8 @@ import CartItem from "../../cart-item/CartItem";
 import cart_styles from "./Cart.module.scss";
 
 function Cart() {
-  const { cart, setCart } = useContext(CartContext);
-  console.log(cart);
-  let price = 0;
-
+  const { cart, totalCost } = useContext(CartContext);
+  
   return (
     <div>
       <div className={cart_styles.cart_wrapper}>
@@ -33,12 +31,12 @@ function Cart() {
         </div>
         <div className={cart_styles.cart_main_window}>
           {cart.map((item) => {
-            return <CartItem item={item} />;
+            return <CartItem key={item.id} item={item} />;
           })}
         </div>
       </div>
       <div className={cart_styles.submit_section}>
-        <p className={cart_styles.total_price}>Total price: {price}</p>
+        <p className={cart_styles.total_price}>Total price: {totalCost} $</p>
         <button className={cart_styles.submit_btn}>Submit</button>
       </div>
     </div>
