@@ -5,7 +5,7 @@ import { firestore, collection, addDoc } from "../../../Data/Firebase";
 import cart_styles from "./Cart.module.scss";
 
 function Cart() {
-  const { cart, totalCost } = useContext(CartContext);
+  const { cart, setCart, totalCost } = useContext(CartContext);
   const formattedTotalCost = Number(totalCost).toFixed(2);
 
   const [formData, setFormData] = useState({
@@ -40,15 +40,15 @@ function Cart() {
       console.error("Error adding order data to the database:", error);
     }
 
-    // Clear the form after submitting the order
-    // setFormData({
-    //   name: "",
-    //   email: "",
-    //   phone: "",
-    //   address: "",
-    // });
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+    });
 
     // Clear the cart after submitting the order
+    setCart([]);
   };
 
   return (
