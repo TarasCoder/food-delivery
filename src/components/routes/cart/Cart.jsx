@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "../../../contexts/CartContext";
+import { ShopContext } from "../../../contexts/ShopContext";
 import CartItem from "../../cart-item/CartItem";
 import { firestore, collection, addDoc } from "../../../Data/Firebase";
 import cart_styles from "./Cart.module.scss";
 
 function Cart() {
+  const { setIsProductSet } = useContext(ShopContext);
+
   const { cart, setCart, totalCost } = useContext(CartContext);
   const formattedTotalCost = Number(totalCost).toFixed(2);
   const isCartEmpty = cart.length === 0;
@@ -24,7 +27,19 @@ function Cart() {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+
+    if (
+      formData.name.trim() === "" ||
+      formData.email.trim() === "" ||
+      formData.phone.trim() === "" ||
+      formData.address.trim() === ""
+    ) {
+      alert("Please fill in all the required fields.");
+      return;
+    }
+
     const orderData = {
       name: formData.name,
       email: formData.email,
@@ -49,13 +64,15 @@ function Cart() {
     });
 
     setCart([]);
+    setIsProductSet(false);
+    setTimeout(() => alert("Your order is placed!"), 1000);
   };
 
   return (
     <div>
       <div className={cart_styles.cart_wrapper}>
         <div className={cart_styles.cart_sidebar}>
-          <form className={cart_styles.cart_form} action="">
+          <form className={cart_styles.cart_form}>
             <div className={cart_styles.input_block}>
               <label htmlFor="name">Name:</label>
               <input
