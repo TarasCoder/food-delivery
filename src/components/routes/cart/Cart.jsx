@@ -8,7 +8,7 @@ import cart_styles from "./Cart.module.scss";
 function Cart() {
   const { setIsProductSet } = useContext(ShopContext);
 
-  const { cart, setCart, totalCost } = useContext(CartContext);
+  const { cart, setCart, totalCost, setTotalCost } = useContext(CartContext);
   const formattedTotalCost = Number(totalCost).toFixed(2);
   const isCartEmpty = cart.length === 0;
 
@@ -65,6 +65,7 @@ function Cart() {
 
     setCart([]);
     setIsProductSet(false);
+    setTotalCost(0);
     setTimeout(() => alert("Your order is placed!"), 1000);
   };
 
