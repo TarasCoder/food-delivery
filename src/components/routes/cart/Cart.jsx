@@ -7,6 +7,7 @@ import cart_styles from "./Cart.module.scss";
 function Cart() {
   const { cart, setCart, totalCost } = useContext(CartContext);
   const formattedTotalCost = Number(totalCost).toFixed(2);
+  const isCartEmpty = cart.length === 0;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -47,7 +48,6 @@ function Cart() {
       address: "",
     });
 
-    // Clear the cart after submitting the order
     setCart([]);
   };
 
@@ -64,6 +64,7 @@ function Cart() {
                 onChange={handleChange}
                 value={formData.name}
                 className={cart_styles.input}
+                required
               />
             </div>
             <div className={cart_styles.input_block}>
@@ -74,6 +75,7 @@ function Cart() {
                 onChange={handleChange}
                 value={formData.email}
                 className={cart_styles.input}
+                required
               />
             </div>
             <div className={cart_styles.input_block}>
@@ -84,6 +86,7 @@ function Cart() {
                 onChange={handleChange}
                 value={formData.phone}
                 className={cart_styles.input}
+                required
               />
             </div>
             <div className={cart_styles.input_block}>
@@ -94,6 +97,7 @@ function Cart() {
                 onChange={handleChange}
                 value={formData.address}
                 className={cart_styles.input}
+                required
               />
             </div>
           </form>
@@ -108,7 +112,12 @@ function Cart() {
         <p className={cart_styles.total_price}>
           Total price: {formattedTotalCost} $
         </p>
-        <button className={cart_styles.submit_btn} onClick={handleSubmit}>
+        <button
+          className={cart_styles.submit_btn}
+          onClick={handleSubmit}
+          disabled={isCartEmpty}
+          type="submit"
+        >
           Submit
         </button>
       </div>

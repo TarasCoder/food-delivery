@@ -1,20 +1,36 @@
-import React, { useContext } from "react";
-import { shops } from "../../../Data/Shops";
+import React, { useContext, useState, useEffect } from "react";
 import ProductItem from "../../product-item/ProductItem";
 import { ShopContext } from "../../../contexts/ShopContext";
+
+import { firestore, collection, getDocs } from "../../../Data/Firebase";
+
 import shop_styles from "./Shop.module.scss";
 
 function Shop() {
+  const [shopsData, setShopsData] = useState([]);
+  useEffect(() => {
+    const fetchShopsFromFirestore = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(firestore, "shops"));
+        const data = querySnapshot.docs.map((doc) => doc.data());
+        setShopsData(data[0].shops);
+      } catch (error) {
+        console.error("Error fetching shops data from Firestore:", error);
+      }
+    };
+
+    fetchShopsFromFirestore();
+  }, []);
+
   const {
     currentShop,
     setCurrentShop,
     isProductSet,
-    // setIsProductSet,
   } = useContext(ShopContext);
 
   const chooseCurrentShop = (ev) => {
     if (!isProductSet) {
-      const shopToDisplay = shops.find(
+      const shopToDisplay = shopsData.find(
         (item) => item.title === ev.target.innerText
       );
       shopToDisplay ? setCurrentShop(shopToDisplay) : setCurrentShop(null);
@@ -25,7 +41,7 @@ function Shop() {
       <div className={shop_styles.shop_sidebar}>
         <p className={shop_styles.title}>Shops:</p>
         <div id="allShops">
-          {shops.map((item) => {
+          {shopsData.map((item) => {
             return (
               <div
                 key={item.id}
