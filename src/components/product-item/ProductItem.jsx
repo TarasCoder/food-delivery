@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { CartContext } from "../../contexts/CartContext";
 import { ShopContext } from "../../contexts/ShopContext";
 import productItem from "./ProductItem.module.scss";
